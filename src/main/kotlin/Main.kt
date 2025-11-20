@@ -1,14 +1,14 @@
 package org.example
 
-import org.example.factory.VehicleFactory
-import org.example.factory.VehicleType
+import org.example.factory.NotificationFactory
+import org.example.factory.NotificationType
 
 fun main() {
     // FACTORY
-    val car = VehicleFactory.create(VehicleType.CAR)
-    val bike = VehicleFactory.create(VehicleType.BIKE)
-    val truck = VehicleFactory.create(VehicleType.TRUCK)
-    car.drive()
-    bike.drive()
-    truck.drive()
+    val sms = NotificationFactory.create(NotificationType.SMS)
+    val email = NotificationFactory.create(NotificationType.EMAIL)
+    val push = NotificationFactory.create(NotificationType.PUSH)
+    sms.send()
+    email.send()
+    push.send()
 }
