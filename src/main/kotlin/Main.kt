@@ -1,14 +1,38 @@
-package org.example
-
-import org.example.factory.NotificationFactory
-import org.example.factory.NotificationType
+import factorymethod.EmailNotificationFactoryMethod
+import abstractfactory.EmailAbstractFactory
+import abstractfactory.NotificationAbstractFactory
+import abstractfactory.PushAbstractFactory
+import abstractfactory.service.AbstractFactoryNotificationService
+import abstractfactory.SMSAbstractFactory
+import factorymethod.NotificationFactoryMethod
+import factorymethod.PushNotificationFactoryMethod
+import factorymethod.SMSNotificationFactoryMethod
 
 fun main() {
-    // FACTORY
-    val sms = NotificationFactory.create(NotificationType.SMS)
-    val email = NotificationFactory.create(NotificationType.EMAIL)
-    val push = NotificationFactory.create(NotificationType.PUSH)
-    sms.send()
-    email.send()
-    push.send()
+    // FACTORY METHOD
+    println("===========================================")
+    println("FACTORY METHOD")
+    println("===========================================")
+    val emailFm: NotificationFactoryMethod = EmailNotificationFactoryMethod()
+    emailFm.sendNotification()
+    val smsFm: NotificationFactoryMethod = SMSNotificationFactoryMethod()
+    smsFm.sendNotification()
+    val pushFm: NotificationFactoryMethod = PushNotificationFactoryMethod()
+    pushFm.sendNotification()
+    println()
+
+    // ABSTRACT FACTORY
+    println("===========================================")
+    println("ABSTRACT FACTORY")
+    println("===========================================")
+    val msg = "Welcome to the Design Patterns Repo!"
+    val emailAf: NotificationAbstractFactory = EmailAbstractFactory()
+    val emailAfS = AbstractFactoryNotificationService(emailAf)
+    emailAfS.notifyUser(userId = 101, message = msg)
+    val smsAf: NotificationAbstractFactory = SMSAbstractFactory()
+    val smsAfS = AbstractFactoryNotificationService(smsAf)
+    smsAfS.notifyUser(userId = 102, message = msg)
+    val pushAf: NotificationAbstractFactory = PushAbstractFactory()
+    val pushAfS = AbstractFactoryNotificationService(pushAf)
+    pushAfS.notifyUser(userId = 102, message = msg)
 }
