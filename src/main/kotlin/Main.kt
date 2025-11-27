@@ -4,6 +4,7 @@ import abstractfactory.NotificationAbstractFactory
 import abstractfactory.PushAbstractFactory
 import abstractfactory.service.AbstractFactoryNotificationService
 import abstractfactory.SMSAbstractFactory
+import builder.model.Notification
 import factorymethod.NotificationFactoryMethod
 import factorymethod.PushNotificationFactoryMethod
 import factorymethod.SMSNotificationFactoryMethod
@@ -35,4 +36,17 @@ fun main() {
     val pushAf: NotificationAbstractFactory = PushAbstractFactory()
     val pushAfS = AbstractFactoryNotificationService(pushAf)
     pushAfS.notifyUser(userId = 102, message = msg)
+    println()
+
+    // BUILDER
+    println("===========================================")
+    println("BUILDER")
+    println("===========================================")
+    val notification = Notification.Builder().apply {
+        id = 1
+        userId = 1
+        subject = "This is the Builder Design Pattern Subject!"
+        content = "This is the Builder Design Pattern Content!"
+    }.build()
+    println(notification.toString())
 }
