@@ -8,6 +8,7 @@ import builder.model.Notification
 import factorymethod.NotificationFactoryMethod
 import factorymethod.PushNotificationFactoryMethod
 import factorymethod.SMSNotificationFactoryMethod
+import prototype.NotificationRegistry
 
 fun main() {
     // FACTORY METHOD
@@ -49,4 +50,19 @@ fun main() {
         content = "This is the Builder Design Pattern Content!"
     }.build()
     println(notification.toString())
+    println()
+
+    println("===========================================")
+    println("PROTOTYPE")
+    println("===========================================")
+    val userIds = intArrayOf(1, 2, 3, 4)
+    val newUserIds = intArrayOf(3, 4)
+    val welcomeEmailTemplate = NotificationRegistry.getPrototype("WELCOME_EMAIL")
+    for(i in newUserIds.indices) {
+        welcomeEmailTemplate.copy(userId = newUserIds[i]).show()
+    }
+    val blackFridayEmailTemplate = NotificationRegistry.getPrototype("BF_EMAIL")
+    for(i in userIds.indices) {
+        blackFridayEmailTemplate.copy(userId = userIds[i]).show()
+    }
 }
